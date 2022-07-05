@@ -6,6 +6,7 @@
  * By @joelgriffith
  */
 import * as cp from 'child_process'
+// @ts-ignore
 const nodeExec = cp.default.exec
 import os from 'os'
 import { dirname } from 'path';
@@ -13,12 +14,18 @@ import { fileURLToPath } from 'url';
 import * as path from 'path'
 import { promisify } from 'util'
 import extract from 'extract-zip';
+// @ts-ignore
 import fs from 'fs-extra'
+// @ts-ignore
 import * as _ from 'lodash'
+// @ts-ignore
 import fetch from 'node-fetch';
+// @ts-ignore
 import { installBrowsersForNpmInstall } from 'playwright-core/lib/server'
 import puppeteer from 'puppeteer'
+// @ts-ignore
 import rimraf from 'rimraf'
+// @ts-ignore
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const execAsync = promisify(nodeExec);
@@ -120,6 +127,7 @@ const downloadChromium = () => {
     `Downloading chromium for revision ${PUPPETEER_CHROMIUM_REVISION}`,
   );
 
+  // @ts-ignore
   return puppeteer.createBrowserFetcher().download(PUPPETEER_CHROMIUM_REVISION);
 };
 

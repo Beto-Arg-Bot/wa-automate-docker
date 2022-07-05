@@ -31,7 +31,7 @@ services:
       NODE_ENV: 'production'
 
   owa:
-    image: openwa/wa-automate:latest
+    image: beto-wapp:local
     hostname: owa
     init: true
     restart: on-failure
