@@ -21,9 +21,12 @@ echo "Starting the application"
 echo $@
 if [[ $@ == *"--no-update"* ]]; then
   echo "Skipping update"
-  else eval "PUPPETEER_SKIP_DOWNLOAD=true npm i @open-wa/wa-automate@latest --ignore-scripts"
+  else 
+  echo "Updating application"
+  eval "PUPPETEER_SKIP_DOWNLOAD=true npm i @open-wa/wa-automate@latest --ignore-scripts"
+
 fi
-exec node ./src/index.js $@
+exec node ./src/index.js --ezqr $@
 # exec dumb-init -- node ./node_modules/@open-wa/wa-automate/bin/server.js $@
 # node=$!
 # echo "PID: $node"
