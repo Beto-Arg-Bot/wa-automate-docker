@@ -26,7 +26,7 @@ if [[ $@ == *"--no-update"* ]]; then
   eval "PUPPETEER_SKIP_DOWNLOAD=true npm i @open-wa/wa-automate@latest --ignore-scripts"
 
 fi
-exec node ./src/index.js --ezqr $@
+exec node ./src/index.js $@
 # exec dumb-init -- node ./node_modules/@open-wa/wa-automate/bin/server.js $@
 # node=$!
 # echo "PID: $node"
