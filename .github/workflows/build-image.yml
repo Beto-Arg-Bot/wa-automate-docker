@@ -1,0 +1,25 @@
+name: Build and deploy image
+on:
+  push:
+
+env:
+  IMAGE_NAME: base-beto-wapp
+  REGISTRY_LOCATION: southamerica-east1
+  GOOGLE_PROJECT_ID: beto-327315
+  REGISTRY_REPO: beto-bot
+
+jobs:
+  publish-image:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: set docker env
+        run: echo 'DOCKER_BUILDKIT=1' >> $GITHUB_ENV
+
+      - name: Docker base image build
+        run: docker build -t $IMAGE_NAME -f dockerfile .
