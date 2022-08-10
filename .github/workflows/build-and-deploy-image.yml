@@ -1,4 +1,4 @@
-name: Docker base image
+name: Build and deply image
 on:
   push:
     branches: [master]
@@ -34,17 +34,3 @@ jobs:
 
           docker tag $IMAGE_NAME $IMAGE_ID
           docker push $IMAGE_ID
-  production-deploy:
-    needs: publish-image
-    name: Deploy to Production Server
-    runs-on: ubuntu-latest
-    steps:
-      - name: Connecting with SSH to Production Server
-        uses: appleboy/ssh-action@master
-        with:
-          username: ${{ secrets.PRODUCTION_SERVER_USERNAME }}
-          host: ${{ secrets.PRODUCTION_SERVER_IP }}
-          key: ${{ secrets.PRODUCTION_SERVER_PRIVATE_SSH_KEY }}
-          script: |
-            cd Beto
-            docker pull southamerica-east1-docker.pkg.dev/beto-327315/beto-bot/base-beto-wapp:latest
