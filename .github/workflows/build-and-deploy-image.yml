@@ -1,0 +1,36 @@
+name: Build and deploy image
+on:
+  push:
+    branches: [master]
+
+env:
+  IMAGE_NAME: base-beto-wapp
+  REGISTRY_LOCATION: southamerica-east1
+  GOOGLE_PROJECT_ID: beto-327315
+  REGISTRY_REPO: beto-bot
+
+jobs:
+  publish-image:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: set docker env
+        run: echo 'DOCKER_BUILDKIT=1' >> $GITHUB_ENV
+
+      - name: Docker base image build
+        run: docker build -t $IMAGE_NAME -f dockerfile .
+
+      - name: Log into Google Artifact Registry 
+        run: echo "${{ secrets.GCLOUD_ARTIFACT_REGISTRY_SERVICE_ACCOUNT_KEY }}" | docker login -u _json_key_base64 --password-stdin https://$REGISTRY_LOCATION-docker.pkg.dev
+
+      - name: Push image
+        run: |
+          IMAGE_ID=$REGISTRY_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT_ID/$REGISTRY_REPO/$IMAGE_NAME:latest
+
+          docker tag $IMAGE_NAME $IMAGE_ID
+          docker push $IMAGE_ID

@@ -23,3 +23,8 @@ For example:
 ```
 
 See here for more information on [cli flags - https://github.com/open-wa/wa-automate-nodejs/blob/82ecae471e9cdf0013b81f53c2f83d2b33d6fa42/src/cli/setup.ts#L27](https://github.com/open-wa/wa-automate-nodejs/blob/82ecae471e9cdf0013b81f53c2f83d2b33d6fa42/src/cli/setup.ts#L27)
+
+
+## Buildkit 
+
+If you are using Docker v18.09 or later, BuildKit mode can be enabled by setting ```export DOCKER_BUILDKIT=1``` on the client side.
