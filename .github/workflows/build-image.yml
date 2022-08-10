@@ -14,7 +14,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-
+      
+      - name: Log into Google Artifact Registry 
+        run: echo "${{ secrets.GCLOUD_ARTIFACT_REGISTRY_SERVICE_ACCOUNT_KEY }}" | docker login -u _json_key_base64 --password-stdin https://$REGISTRY_LOCATION-docker.pkg.dev
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Build

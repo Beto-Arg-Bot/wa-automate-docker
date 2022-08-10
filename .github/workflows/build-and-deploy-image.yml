@@ -23,11 +23,12 @@ jobs:
       - name: set docker env
         run: echo 'DOCKER_BUILDKIT=1' >> $GITHUB_ENV
 
+      - name: Log into Google Artifact Registry 
+        run: echo "${{ secrets.GCLOUD_ARTIFACT_REGISTRY_SERVICE_ACCOUNT_KEY }}" | docker login -u _json_key_base64 --password-stdin https://$REGISTRY_LOCATION-docker.pkg.dev
+      
       - name: Docker base image build
         run: docker build -t $IMAGE_NAME -f dockerfile .
 
-      - name: Log into Google Artifact Registry 
-        run: echo "${{ secrets.GCLOUD_ARTIFACT_REGISTRY_SERVICE_ACCOUNT_KEY }}" | docker login -u _json_key_base64 --password-stdin https://$REGISTRY_LOCATION-docker.pkg.dev
 
       - name: Push image
         run: |
