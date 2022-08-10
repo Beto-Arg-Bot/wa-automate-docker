@@ -1,7 +1,7 @@
 name: Docker base image
 on:
   push:
-    branches: [production]
+    branches: [master]
 
 env:
   IMAGE_NAME: base-beto-wapp
