@@ -1,0 +1,27 @@
+name: Build image
+on:
+  push:
+
+env:
+  IMAGE_NAME: base-beto-wapp
+  REGISTRY_LOCATION: southamerica-east1
+  GOOGLE_PROJECT_ID: beto-327315
+  REGISTRY_REPO: beto-bot
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: false
+          tags: base-beto-wapp:latest
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
