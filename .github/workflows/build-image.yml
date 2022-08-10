@@ -1,4 +1,4 @@
-name: Build and deploy image
+name: Build image
 on:
   push:
 
