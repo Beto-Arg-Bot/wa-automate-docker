@@ -29,7 +29,7 @@ RUN <<eot bash
   mkdir -p /usr/src/app/node_modules
   mkdir -p /sessions
   apt update
-  apt install nano dumb-init -y
+  apt install nano git dumb-init -y
   dpkg --print-architecture
   if [ $(dpkg --print-architecture) == "arm64" ];
   then
